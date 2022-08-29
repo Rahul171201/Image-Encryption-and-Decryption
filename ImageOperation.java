@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 public class ImageOperation {
 
-  public static void operate(int key) {
+  public static void operate(int key, int operation) {
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.showOpenDialog(null);
     File file = fileChooser.getSelectedFile();
@@ -34,7 +34,10 @@ public class ImageOperation {
       fos.write(data);
       fos.close();
       fis.close();
-      JOptionPane.showMessageDialog(null, "Encyption Completed");
+      if (operation == 0) JOptionPane.showMessageDialog(
+        null,
+        "Encyption Completed"
+      ); else JOptionPane.showMessageDialog(null, "Decryption Completed");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -53,10 +56,15 @@ public class ImageOperation {
     // creating font
     Font font = new Font("Roboto", Font.BOLD, 25);
 
-    // button
-    JButton button = new JButton();
-    button.setText("Open Image");
-    button.setFont(font);
+    // encryption button
+    JButton encryptButton = new JButton();
+    encryptButton.setText("Encrypt");
+    encryptButton.setFont(font);
+
+    // decryption button
+    JButton decryptButton = new JButton();
+    decryptButton.setText("Decrypt");
+    decryptButton.setFont(font);
 
     // text field
     JTextField textField = new JTextField(10);
@@ -65,17 +73,27 @@ public class ImageOperation {
     // setting layout
     f.setLayout(new FlowLayout());
 
-    button.addActionListener(
+    encryptButton.addActionListener(
       e -> {
-        System.out.println("button clicked");
+        System.out.println("encryption button clicked");
         String text = textField.getText();
         int temp = Integer.parseInt(text);
-        operate(temp);
+        operate(temp, 0);
+      }
+    );
+
+    decryptButton.addActionListener(
+      e -> {
+        System.out.println("decryption button clicked");
+        String text = textField.getText();
+        int temp = Integer.parseInt(text);
+        operate(temp, 1);
       }
     );
 
     // adding features to the frame
-    f.add(button);
+    f.add(encryptButton);
+    f.add(decryptButton);
     f.add(textField);
 
     f.setVisible(true);
