@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -25,7 +26,7 @@ public class ImageOperation {
 
       int current = 0;
       for (byte b : data) {
-        System.out.println(b);
+        // System.out.println(b);
         data[current] = (byte) (b ^ key);
         current++;
       }
@@ -49,7 +50,7 @@ public class ImageOperation {
     // creating frame
     JFrame f = new JFrame();
     f.setTitle("Image Encryption and Decryption");
-    f.setSize(500, 500);
+    f.setSize(350, 500);
     f.setLocationRelativeTo(null);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -65,6 +66,9 @@ public class ImageOperation {
     JButton decryptButton = new JButton();
     decryptButton.setText("Decrypt");
     decryptButton.setFont(font);
+
+    // label
+    JLabel myLabel = new JLabel("Enter the key");
 
     // text field
     JTextField textField = new JTextField(10);
@@ -94,6 +98,7 @@ public class ImageOperation {
     // adding features to the frame
     f.add(encryptButton);
     f.add(decryptButton);
+    f.add(myLabel);
     f.add(textField);
 
     f.setVisible(true);
